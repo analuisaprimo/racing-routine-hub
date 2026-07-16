@@ -10,10 +10,7 @@ export const Route = createFileRoute("/")({
 function Landing() {
   const nav = useNavigate();
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      if (data.session) nav({ to: "/hoje" as string });
-      else nav({ to: "/auth" as string });
-    });
+    nav({ to: "/hoje" as string });
   }, [nav]);
   return (
     <div className="grid min-h-screen place-items-center">

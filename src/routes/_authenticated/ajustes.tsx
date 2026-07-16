@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { GlassCard } from "@/components/Glass";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { LogOut } from "lucide-react";
+
 
 export const Route = createFileRoute("/_authenticated/ajustes")({ component: Ajustes });
 
@@ -67,12 +67,7 @@ function Ajustes() {
     qc.invalidateQueries({ queryKey: ["prefs"] });
   }
 
-  async function sair() {
-    await qc.cancelQueries();
-    qc.clear();
-    await supabase.auth.signOut();
-    nav({ to: "/auth" as string, replace: true });
-  }
+
 
   return (
     <div className="mx-auto max-w-2xl px-4 pt-6">
@@ -149,12 +144,9 @@ function Ajustes() {
         ))}
       </GlassCard>
 
-      <div className="mt-4 flex gap-2">
-        <button onClick={salvar} className="flex-1 rounded-xl bg-[var(--racing)] px-4 py-3 text-sm font-semibold text-white">
+      <div className="mt-4 flex">
+        <button onClick={salvar} className="w-full rounded-xl bg-[var(--racing)] px-4 py-3 text-sm font-semibold text-white">
           Salvar setup
-        </button>
-        <button onClick={sair} className="rounded-xl bg-white/10 px-4 py-3 text-sm">
-          <LogOut className="h-4 w-4" />
         </button>
       </div>
     </div>
