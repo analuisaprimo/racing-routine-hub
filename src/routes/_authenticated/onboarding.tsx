@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import {
   rotinaPadrao,
   MATERIAS_ESCOLA_SEED,
+  MATERIAS_DIFICULDADES,
   FRENTES_ENEM,
   FRENTES_UFMG,
 } from "@/lib/domain";
@@ -24,8 +25,8 @@ function Onboarding() {
   const [temporada, setTemporada] = useState("Temporada rumo à UFMG");
   const [academiaMin, setAcademiaMin] = useState(60);
   const [pesos, setPesos] = useState({ vestibular: 45, enem: 30, escola: 25 });
-  const [risco, setRisco] = useState<Record<string, number>>(
-    Object.fromEntries(MATERIAS_ESCOLA_SEED.map((m) => [m, 2]))
+  const [risco, setRisco] = useState<Record<string, number>>(() =>
+    Object.fromEntries(MATERIAS_ESCOLA_SEED.map((m) => [m, MATERIAS_DIFICULDADES[m] ?? 2]))
   );
   const [salvando, setSalvando] = useState(false);
 

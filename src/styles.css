@@ -55,52 +55,52 @@
 }
 
 :root {
-  /* Base dark — dashboard de telemetria */
-  --background: oklch(0.16 0.03 265);
-  --foreground: oklch(0.97 0.005 250);
-  --muted: oklch(0.24 0.02 260);
-  --muted-foreground: oklch(0.7 0.015 255);
-  --card: oklch(0.22 0.025 265);
-  --card-foreground: oklch(0.97 0.005 250);
-  --popover: oklch(0.2 0.025 265);
-  --popover-foreground: oklch(0.97 0.005 250);
-  --primary: oklch(0.97 0.005 250);
-  --primary-foreground: oklch(0.16 0.03 265);
-  --secondary: oklch(0.28 0.03 262);
-  --secondary-foreground: oklch(0.97 0.005 250);
-  --accent: oklch(0.3 0.04 265);
-  --accent-foreground: oklch(0.97 0.005 250);
-  --destructive: oklch(0.62 0.24 25);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 14%);
-  --ring: oklch(0.65 0.2 25);
+  /* Base light — dashboard de telemetria rosa/lilás */
+  --background: #FDF7FB;
+  --foreground: #2A2530; /* cinza-chumbo escuro */
+  --muted: #F3EAF6;
+  --muted-foreground: #6A5D77;
+  --card: #FFFFFF;
+  --card-foreground: #2A2530;
+  --popover: #FFFFFF;
+  --popover-foreground: #2A2530;
+  --primary: #EC7FB0;
+  --primary-foreground: #FFFFFF;
+  --secondary: #B090DD;
+  --secondary-foreground: #FFFFFF;
+  --accent: #F5A9C6;
+  --accent-foreground: #FFFFFF;
+  --destructive: #E05D5D;
+  --destructive-foreground: #FFFFFF;
+  --border: rgba(236, 127, 176, 0.15); /* borda rosa suave */
+  --input: rgba(236, 127, 176, 0.1);
+  --ring: #EC7FB0;
 
   /* Cores de identidade */
-  --racing: oklch(0.62 0.24 25); /* #E63946-ish */
-  --racing-foreground: oklch(0.99 0 0);
-  --flag: oklch(0.72 0.16 165); /* verde bandeirada */
-  --flag-foreground: oklch(0.15 0.03 260);
-  --amber: oklch(0.82 0.17 75);
+  --racing: #EC7FB0; /* rosa vibrante */
+  --racing-foreground: #FFFFFF;
+  --flag: #5ED197; /* verde-menta claro */
+  --flag-foreground: #1E4D38;
+  --amber: #F0B85D;
 
   /* Categorias */
-  --escola: oklch(0.72 0.15 235);
-  --enem: oklch(0.72 0.17 290);
-  --vestibular: oklch(0.7 0.2 25);
-  --scuderia: oklch(0.78 0.16 55);
-  --academia: oklch(0.75 0.16 145);
+  --escola: #C9A9E8; /* lilás */
+  --enem: #EC7FB0; /* rosa */
+  --vestibular: #B090DD; /* lilás escuro */
+  --scuderia: #E883B5; /* rosa médio */
+  --academia: #8CD6BA; /* verde menta */
 
-  /* Glass */
-  --glass-bg: color-mix(in oklab, white 8%, transparent);
-  --glass-bg-strong: color-mix(in oklab, white 14%, transparent);
-  --glass-border: color-mix(in oklab, white 22%, transparent);
-  --glass-shadow: 0 20px 60px -20px oklch(0 0 0 / 55%),
-    0 2px 8px -2px oklch(0 0 0 / 40%);
+  /* Glass adaptado pro claro */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg-strong: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-shadow: 0 16px 40px -12px rgba(236, 127, 176, 0.15),
+    0 2px 8px -2px rgba(201, 169, 232, 0.15);
 
-  /* Céu (gradiente do fundo, mudado por hora) */
-  --sky-1: oklch(0.18 0.04 275);
-  --sky-2: oklch(0.24 0.06 285);
-  --sky-3: oklch(0.14 0.05 260);
+  /* Céu (gradiente do fundo claro) */
+  --sky-1: #FDF7FB; /* rosa muito claro */
+  --sky-2: #F6F0FA; /* lilás sutil */
+  --sky-3: #ECE4F6; /* lilás claro */
 }
 
 @layer base {
@@ -121,7 +121,7 @@
       ),
       radial-gradient(
         ellipse 100% 70% at 90% 100%,
-        color-mix(in oklab, var(--racing) 22%, transparent),
+        color-mix(in oklab, var(--racing) 12%, transparent),
         transparent 55%
       ),
       linear-gradient(180deg, var(--sky-1), var(--sky-3));
@@ -146,7 +146,7 @@
   backdrop-filter: blur(28px) saturate(150%);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow),
-    inset 0 1px 0 0 color-mix(in oklab, white 24%, transparent);
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
   border-radius: var(--radius-2xl);
 }
 
@@ -155,13 +155,13 @@
   backdrop-filter: blur(40px) saturate(160%);
   border: 1px solid var(--glass-border);
   box-shadow: var(--glass-shadow),
-    inset 0 1px 0 0 color-mix(in oklab, white 30%, transparent);
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
   border-radius: var(--radius-2xl);
 }
 
 @utility glass-inset {
-  background: color-mix(in oklab, black 22%, transparent);
-  border: 1px solid color-mix(in oklab, white 8%, transparent);
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: var(--radius-lg);
 }
 

@@ -102,29 +102,43 @@ export function rotinaPadrao(): Omit<RoutineBlock, "id">[] {
   return base;
 }
 
-// 20 matérias tipo escola (edital padrão de ensino médio brasileiro)
+// 15 matérias escolares com dificuldades padrão
 export const MATERIAS_ESCOLA_SEED = [
-  "Português",
-  "Redação",
-  "Literatura",
   "Matemática",
-  "Física",
-  "Química",
-  "Biologia",
+  "Português",
+  "Produção de texto",
+  "Literatura",
   "História",
-  "Geografia",
   "Filosofia",
   "Sociologia",
-  "Inglês",
-  "Espanhol",
-  "Arte",
-  "Educação Física",
-  "Projeto de Vida",
-  "Eletiva 1",
-  "Eletiva 2",
-  "Trilha STEM",
-  "Iniciação Científica",
+  "Geografia",
+  "Matemática e Consumo",
+  "Matemática do Cotidiano",
+  "Elianete",
+  "Elizandra",
+  "Química",
+  "Física",
+  "Biologia",
 ];
+
+export const MATERIAS_DIFICULDADES: Record<string, number> = {
+  "Matemática": 2, // Médio
+  "Português": 2, // Médio
+  "Produção de texto": 2, // Médio
+  "Literatura": 1, // Mínimo
+  "História": 2, // Médio
+  "Filosofia": 2, // Médio
+  "Sociologia": 2, // Médio
+  "Geografia": 1, // Mínimo
+  "Matemática e Consumo": 1, // Mínimo
+  "Matemática do Cotidiano": 1, // Mínimo
+  "Elianete": 2, // Médio
+  "Elizandra": 2, // Médio
+  "Química": 3, // Máximo
+  "Física": 2, // Médio
+  "Biologia": 3, // Máximo
+};
+
 
 // Frentes ENEM + Vestibular UFMG (seed rápido, editável)
 export const FRENTES_ENEM = [

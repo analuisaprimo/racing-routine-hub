@@ -32,10 +32,26 @@ function Foco() {
 
   useEffect(() => {
     supabase.auth.getUser().then(async ({ data: u }) => {
+      if (!u.user) return;
       const hoje = new Date().toISOString().slice(0, 10);
-      const { data } = await supabase.from("study_sessions").select("id").eq("user_id", u.user!.id).eq("data", hoje);
+      const { data } = await supabase.from("study_sessions").select("id").eq("user_id", u.user.id).eq("data", hoje);
       setVoltasHoje(data?.length ?? 0);
     });
+
+    const savedSub = localStorage.getItem("starting_subject_id");
+    const savedDur = localStorage.getItem("starting_duration_min");
+    if (savedSub !== null) {
+      setSubjectId(savedSub || null);
+      localStorage.removeItem("starting_subject_id");
+    }
+    if (savedDur !== null) {
+      const dur = Number(savedDur);
+      if (!isNaN(dur) && dur > 0) {
+        setDuracaoMin(dur);
+        setRestante(dur * 60);
+      }
+      localStorage.removeItem("starting_duration_min");
+    }
   }, []);
 
   useEffect(() => {

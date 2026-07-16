@@ -89,7 +89,7 @@ function Estudos() {
                   <div className="min-w-0">
                     <div className="truncate text-sm">{s.nome}</div>
                     <div className="text-xs opacity-60">
-                      Risco {s.risco === 1 ? "baixo" : s.risco === 2 ? "médio" : "alto"}
+                      Dificuldade: {s.risco === 1 ? "Mínimo" : s.risco === 2 ? "Médio" : "Máximo"}
                       {s.prova_proxima && ` · prova ${new Date(s.prova_proxima).toLocaleDateString("pt-BR")}`}
                     </div>
                   </div>

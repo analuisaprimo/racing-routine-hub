@@ -29,6 +29,20 @@ function Ajustes() {
     },
   });
 
+  const { data: subjects } = useQuery({
+    queryKey: ["subjects-ajustes"],
+    queryFn: async () => {
+      const { data: u } = await supabase.auth.getUser();
+      const { data } = await supabase
+        .from("subjects")
+        .select("*")
+        .eq("user_id", u.user!.id)
+        .eq("categoria", "escola")
+        .order("nome");
+      return data ?? [];
+    },
+  });
+
   const [form, setForm] = useState({
     nome: "",
     temporada_label: "",
@@ -120,6 +134,51 @@ function Ajustes() {
             />
           </div>
         ))}
+      </GlassCard>
+
+      <GlassCard className="mt-4 space-y-3 shadow-sm border border-white/50">
+        <h2 className="text-sm font-bold uppercase tracking-widest opacity-60">Dificuldade das Matérias</h2>
+        <p className="text-xs opacity-75 mb-2">Configure o peso de sorteio/frequência no calendário de estudos.</p>
+        <div className="max-h-[300px] overflow-y-auto space-y-2 pr-1 scrollbar-none">
+          {subjects?.map((s) => (
+            <div key={s.id} className="flex items-center justify-between text-sm py-2 border-b border-black/5 last:border-0">
+              <span className="truncate flex-1 font-medium">{s.nome}</span>
+              <div className="flex gap-1 ml-2">
+                {([1, 2, 3] as const).map((r) => (
+                  <button
+                    key={r}
+                    onClick={async () => {
+                      const { error } = await supabase
+                        .from("subjects")
+                        .update({ risco: r })
+                        .eq("id", s.id);
+                      if (error) toast.error(error.message);
+                      else {
+                        toast.success(`Dificuldade de ${s.nome} atualizada.`);
+                        qc.invalidateQueries({ queryKey: ["subjects-ajustes"] });
+                        qc.invalidateQueries({ queryKey: ["hoje-data"] });
+                        // Limpa o cache do dia para forçar recalculação imediata
+                        const hoje = new Date().toISOString().slice(0, 10);
+                        localStorage.removeItem(`pit_calendar_${hoje}`);
+                      }
+                    }}
+                    className={`h-7 px-2.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition ${
+                      s.risco === r
+                        ? r === 1
+                          ? "bg-[var(--flag)] text-[var(--flag-foreground)] shadow-sm"
+                          : r === 2
+                          ? "bg-[var(--color-amber)] text-black shadow-sm"
+                          : "bg-[var(--racing)] text-white shadow-sm"
+                        : "bg-black/5 opacity-60 hover:opacity-100"
+                    }`}
+                  >
+                    {r === 1 ? "Mín" : r === 2 ? "Méd" : "Máx"}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </GlassCard>
 
       <GlassCard className="mt-4 space-y-3">
