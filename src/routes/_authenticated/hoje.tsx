@@ -214,7 +214,7 @@ function Hoje() {
             {timeline.map((b, i) => {
               const passou = timeToMin(b.fim) < minutosAgora;
               const agora = timeToMin(b.inicio) <= minutosAgora && timeToMin(b.fim) > minutosAgora;
-              const color = CATEGORIA_COR[b.tipo] ?? "#888";
+              const color = (CATEGORIA_COR as any)[b.tipo] ?? "#888";
               return (
                 <motion.div
                   key={`${b.inicio}-${i}`}
@@ -317,7 +317,7 @@ function Hoje() {
 function ProximaVoltaCard({ bloco, agora }: { bloco: any; agora: number }) {
   const inicioMin = timeToMin(bloco.inicio);
   const emMin = inicioMin - agora;
-  const color = CATEGORIA_COR[bloco.tipo] ?? "#888";
+  const color = (CATEGORIA_COR as any)[bloco.tipo] ?? "#888";
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }}
