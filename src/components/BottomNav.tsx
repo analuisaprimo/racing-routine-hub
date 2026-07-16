@@ -2,13 +2,14 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { Flag, Calendar, BookOpen, Wrench, Timer, LineChart, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const items = [
+type NavItem = { to: string; label: string; icon: typeof Flag; primary?: boolean };
+const items: NavItem[] = [
   { to: "/hoje", label: "Hoje", icon: Flag },
   { to: "/circuito", label: "Circuito", icon: Calendar },
   { to: "/foco", label: "Foco", icon: Timer, primary: true },
   { to: "/estudos", label: "Estudos", icon: BookOpen },
   { to: "/scuderia", label: "Scuderia", icon: Wrench },
-] as const;
+];
 
 export function BottomNav() {
   const path = useRouterState({ select: (s) => s.location.pathname });
