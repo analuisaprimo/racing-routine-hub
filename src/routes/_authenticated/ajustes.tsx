@@ -63,7 +63,7 @@ function Ajustes() {
 
   async function togglePref(k: string, v: boolean) {
     const { data: u } = await supabase.auth.getUser();
-    await supabase.from("notification_prefs").update({ [k]: v }).eq("user_id", u.user!.id);
+    await supabase.from("notification_prefs").update({ [k]: v } as any).eq("user_id", u.user!.id);
     qc.invalidateQueries({ queryKey: ["prefs"] });
   }
 

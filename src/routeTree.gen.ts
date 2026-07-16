@@ -12,7 +12,14 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedTelemetriaRouteImport } from './routes/_authenticated/telemetria'
+import { Route as AuthenticatedScuderiaRouteImport } from './routes/_authenticated/scuderia'
 import { Route as AuthenticatedOnboardingRouteImport } from './routes/_authenticated/onboarding'
+import { Route as AuthenticatedHojeRouteImport } from './routes/_authenticated/hoje'
+import { Route as AuthenticatedFocoRouteImport } from './routes/_authenticated/foco'
+import { Route as AuthenticatedEstudosRouteImport } from './routes/_authenticated/estudos'
+import { Route as AuthenticatedCircuitoRouteImport } from './routes/_authenticated/circuito'
+import { Route as AuthenticatedAjustesRouteImport } from './routes/_authenticated/ajustes'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
@@ -28,40 +35,123 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedTelemetriaRoute = AuthenticatedTelemetriaRouteImport.update({
+  id: '/telemetria',
+  path: '/telemetria',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedScuderiaRoute = AuthenticatedScuderiaRouteImport.update({
+  id: '/scuderia',
+  path: '/scuderia',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedOnboardingRoute = AuthenticatedOnboardingRouteImport.update({
   id: '/onboarding',
   path: '/onboarding',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedHojeRoute = AuthenticatedHojeRouteImport.update({
+  id: '/hoje',
+  path: '/hoje',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedFocoRoute = AuthenticatedFocoRouteImport.update({
+  id: '/foco',
+  path: '/foco',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedEstudosRoute = AuthenticatedEstudosRouteImport.update({
+  id: '/estudos',
+  path: '/estudos',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCircuitoRoute = AuthenticatedCircuitoRouteImport.update({
+  id: '/circuito',
+  path: '/circuito',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAjustesRoute = AuthenticatedAjustesRouteImport.update({
+  id: '/ajustes',
+  path: '/ajustes',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/ajustes': typeof AuthenticatedAjustesRoute
+  '/circuito': typeof AuthenticatedCircuitoRoute
+  '/estudos': typeof AuthenticatedEstudosRoute
+  '/foco': typeof AuthenticatedFocoRoute
+  '/hoje': typeof AuthenticatedHojeRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/scuderia': typeof AuthenticatedScuderiaRoute
+  '/telemetria': typeof AuthenticatedTelemetriaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/ajustes': typeof AuthenticatedAjustesRoute
+  '/circuito': typeof AuthenticatedCircuitoRoute
+  '/estudos': typeof AuthenticatedEstudosRoute
+  '/foco': typeof AuthenticatedFocoRoute
+  '/hoje': typeof AuthenticatedHojeRoute
   '/onboarding': typeof AuthenticatedOnboardingRoute
+  '/scuderia': typeof AuthenticatedScuderiaRoute
+  '/telemetria': typeof AuthenticatedTelemetriaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/ajustes': typeof AuthenticatedAjustesRoute
+  '/_authenticated/circuito': typeof AuthenticatedCircuitoRoute
+  '/_authenticated/estudos': typeof AuthenticatedEstudosRoute
+  '/_authenticated/foco': typeof AuthenticatedFocoRoute
+  '/_authenticated/hoje': typeof AuthenticatedHojeRoute
   '/_authenticated/onboarding': typeof AuthenticatedOnboardingRoute
+  '/_authenticated/scuderia': typeof AuthenticatedScuderiaRoute
+  '/_authenticated/telemetria': typeof AuthenticatedTelemetriaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/onboarding'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/ajustes'
+    | '/circuito'
+    | '/estudos'
+    | '/foco'
+    | '/hoje'
+    | '/onboarding'
+    | '/scuderia'
+    | '/telemetria'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/onboarding'
+  to:
+    | '/'
+    | '/auth'
+    | '/ajustes'
+    | '/circuito'
+    | '/estudos'
+    | '/foco'
+    | '/hoje'
+    | '/onboarding'
+    | '/scuderia'
+    | '/telemetria'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/ajustes'
+    | '/_authenticated/circuito'
+    | '/_authenticated/estudos'
+    | '/_authenticated/foco'
+    | '/_authenticated/hoje'
     | '/_authenticated/onboarding'
+    | '/_authenticated/scuderia'
+    | '/_authenticated/telemetria'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -93,6 +183,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/telemetria': {
+      id: '/_authenticated/telemetria'
+      path: '/telemetria'
+      fullPath: '/telemetria'
+      preLoaderRoute: typeof AuthenticatedTelemetriaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/scuderia': {
+      id: '/_authenticated/scuderia'
+      path: '/scuderia'
+      fullPath: '/scuderia'
+      preLoaderRoute: typeof AuthenticatedScuderiaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/onboarding': {
       id: '/_authenticated/onboarding'
       path: '/onboarding'
@@ -100,15 +204,64 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/hoje': {
+      id: '/_authenticated/hoje'
+      path: '/hoje'
+      fullPath: '/hoje'
+      preLoaderRoute: typeof AuthenticatedHojeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/foco': {
+      id: '/_authenticated/foco'
+      path: '/foco'
+      fullPath: '/foco'
+      preLoaderRoute: typeof AuthenticatedFocoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/estudos': {
+      id: '/_authenticated/estudos'
+      path: '/estudos'
+      fullPath: '/estudos'
+      preLoaderRoute: typeof AuthenticatedEstudosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/circuito': {
+      id: '/_authenticated/circuito'
+      path: '/circuito'
+      fullPath: '/circuito'
+      preLoaderRoute: typeof AuthenticatedCircuitoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/ajustes': {
+      id: '/_authenticated/ajustes'
+      path: '/ajustes'
+      fullPath: '/ajustes'
+      preLoaderRoute: typeof AuthenticatedAjustesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAjustesRoute: typeof AuthenticatedAjustesRoute
+  AuthenticatedCircuitoRoute: typeof AuthenticatedCircuitoRoute
+  AuthenticatedEstudosRoute: typeof AuthenticatedEstudosRoute
+  AuthenticatedFocoRoute: typeof AuthenticatedFocoRoute
+  AuthenticatedHojeRoute: typeof AuthenticatedHojeRoute
   AuthenticatedOnboardingRoute: typeof AuthenticatedOnboardingRoute
+  AuthenticatedScuderiaRoute: typeof AuthenticatedScuderiaRoute
+  AuthenticatedTelemetriaRoute: typeof AuthenticatedTelemetriaRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAjustesRoute: AuthenticatedAjustesRoute,
+  AuthenticatedCircuitoRoute: AuthenticatedCircuitoRoute,
+  AuthenticatedEstudosRoute: AuthenticatedEstudosRoute,
+  AuthenticatedFocoRoute: AuthenticatedFocoRoute,
+  AuthenticatedHojeRoute: AuthenticatedHojeRoute,
   AuthenticatedOnboardingRoute: AuthenticatedOnboardingRoute,
+  AuthenticatedScuderiaRoute: AuthenticatedScuderiaRoute,
+  AuthenticatedTelemetriaRoute: AuthenticatedTelemetriaRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

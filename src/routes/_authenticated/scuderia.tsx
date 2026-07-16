@@ -50,7 +50,7 @@ function Scuderia() {
     }
   }
 
-  async function mover(id: string, status: string) {
+  async function mover(id: string, status: "boxes" | "volta" | "bandeirada") {
     await supabase.from("scuderia_tasks").update({ status }).eq("id", id);
     qc.invalidateQueries({ queryKey: ["scuderia"] });
     if (status === "bandeirada") toast.success("🏁 Bandeirada!");
