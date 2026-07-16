@@ -14,7 +14,257 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      notification_prefs: {
+        Row: {
+          aviso_bloco: boolean
+          aviso_scuderia: boolean
+          aviso_transicao: boolean
+          celebracao: boolean
+          streak_risco: boolean
+          user_id: string
+          wind_down: boolean
+        }
+        Insert: {
+          aviso_bloco?: boolean
+          aviso_scuderia?: boolean
+          aviso_transicao?: boolean
+          celebracao?: boolean
+          streak_risco?: boolean
+          user_id: string
+          wind_down?: boolean
+        }
+        Update: {
+          aviso_bloco?: boolean
+          aviso_scuderia?: boolean
+          aviso_transicao?: boolean
+          celebracao?: boolean
+          streak_risco?: boolean
+          user_id?: string
+          wind_down?: boolean
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          academia_duracao_min: number | null
+          created_at: string
+          id: string
+          nome: string
+          onboarding_completo: boolean
+          peso_enem: number | null
+          peso_escola: number | null
+          peso_vestibular: number | null
+          sono_fim: string | null
+          sono_inicio: string | null
+          temporada_label: string | null
+          updated_at: string
+        }
+        Insert: {
+          academia_duracao_min?: number | null
+          created_at?: string
+          id: string
+          nome?: string
+          onboarding_completo?: boolean
+          peso_enem?: number | null
+          peso_escola?: number | null
+          peso_vestibular?: number | null
+          sono_fim?: string | null
+          sono_inicio?: string | null
+          temporada_label?: string | null
+          updated_at?: string
+        }
+        Update: {
+          academia_duracao_min?: number | null
+          created_at?: string
+          id?: string
+          nome?: string
+          onboarding_completo?: boolean
+          peso_enem?: number | null
+          peso_escola?: number | null
+          peso_vestibular?: number | null
+          sono_fim?: string | null
+          sono_inicio?: string | null
+          temporada_label?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      routine_blocks: {
+        Row: {
+          created_at: string
+          dia_semana: number
+          fim: string
+          id: string
+          inicio: string
+          label: string | null
+          tipo: Database["public"]["Enums"]["block_type"]
+          travado: boolean
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          dia_semana: number
+          fim: string
+          id?: string
+          inicio: string
+          label?: string | null
+          tipo: Database["public"]["Enums"]["block_type"]
+          travado?: boolean
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          dia_semana?: number
+          fim?: string
+          id?: string
+          inicio?: string
+          label?: string | null
+          tipo?: Database["public"]["Enums"]["block_type"]
+          travado?: boolean
+          user_id?: string
+        }
+        Relationships: []
+      }
+      scuderia_tasks: {
+        Row: {
+          created_at: string
+          descricao: string | null
+          id: string
+          prazo: string | null
+          prioridade: number
+          sobrou_oficina: boolean
+          status: Database["public"]["Enums"]["task_status"]
+          titulo: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          prazo?: string | null
+          prioridade?: number
+          sobrou_oficina?: boolean
+          status?: Database["public"]["Enums"]["task_status"]
+          titulo: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          descricao?: string | null
+          id?: string
+          prazo?: string | null
+          prioridade?: number
+          sobrou_oficina?: boolean
+          status?: Database["public"]["Enums"]["task_status"]
+          titulo?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      streaks: {
+        Row: {
+          atual: number
+          melhor: number
+          ultima_data: string | null
+          user_id: string
+        }
+        Insert: {
+          atual?: number
+          melhor?: number
+          ultima_data?: string | null
+          user_id: string
+        }
+        Update: {
+          atual?: number
+          melhor?: number
+          ultima_data?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      study_sessions: {
+        Row: {
+          concluido: boolean
+          created_at: string
+          data: string
+          duracao_min: number
+          id: string
+          reacao: Database["public"]["Enums"]["session_reaction"] | null
+          subject_id: string | null
+          tipo_ciclo: string | null
+          user_id: string
+        }
+        Insert: {
+          concluido?: boolean
+          created_at?: string
+          data?: string
+          duracao_min: number
+          id?: string
+          reacao?: Database["public"]["Enums"]["session_reaction"] | null
+          subject_id?: string | null
+          tipo_ciclo?: string | null
+          user_id: string
+        }
+        Update: {
+          concluido?: boolean
+          created_at?: string
+          data?: string
+          duracao_min?: number
+          id?: string
+          reacao?: Database["public"]["Enums"]["session_reaction"] | null
+          subject_id?: string | null
+          tipo_ciclo?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "study_sessions_subject_id_fkey"
+            columns: ["subject_id"]
+            isOneToOne: false
+            referencedRelation: "subjects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      subjects: {
+        Row: {
+          categoria: Database["public"]["Enums"]["subject_category"]
+          cor: string | null
+          created_at: string
+          id: string
+          meta_semanal_min: number | null
+          nome: string
+          prova_proxima: string | null
+          risco: number
+          user_id: string
+        }
+        Insert: {
+          categoria?: Database["public"]["Enums"]["subject_category"]
+          cor?: string | null
+          created_at?: string
+          id?: string
+          meta_semanal_min?: number | null
+          nome: string
+          prova_proxima?: string | null
+          risco?: number
+          user_id: string
+        }
+        Update: {
+          categoria?: Database["public"]["Enums"]["subject_category"]
+          cor?: string | null
+          created_at?: string
+          id?: string
+          meta_semanal_min?: number | null
+          nome?: string
+          prova_proxima?: string | null
+          risco?: number
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +273,18 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      block_type:
+        | "escola"
+        | "scuderia"
+        | "academia"
+        | "deslocamento"
+        | "sono"
+        | "livre"
+        | "jantar"
+        | "boxes"
+      session_reaction: "tranquila" | "apertada" | "travei"
+      subject_category: "escola" | "enem" | "vestibular" | "scuderia"
+      task_status: "boxes" | "volta" | "bandeirada"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +411,20 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      block_type: [
+        "escola",
+        "scuderia",
+        "academia",
+        "deslocamento",
+        "sono",
+        "livre",
+        "jantar",
+        "boxes",
+      ],
+      session_reaction: ["tranquila", "apertada", "travei"],
+      subject_category: ["escola", "enem", "vestibular", "scuderia"],
+      task_status: ["boxes", "volta", "bandeirada"],
+    },
   },
 } as const
