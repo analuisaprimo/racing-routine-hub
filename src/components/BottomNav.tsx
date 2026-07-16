@@ -23,7 +23,7 @@ export function BottomNav() {
             return (
               <Link
                 key={it.to}
-                to={it.to}
+                to={it.to as string}
                 className={cn(
                   "mx-1 grid h-12 w-12 place-items-center rounded-full text-racing-foreground",
                   "bg-[var(--racing)] shadow-[0_8px_24px_-6px_var(--racing)]",
@@ -38,7 +38,7 @@ export function BottomNav() {
           return (
             <Link
               key={it.to}
-              to={it.to}
+              to={it.to as string}
               className={cn(
                 "flex h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-3 text-xs font-medium transition-colors",
                 active ? "bg-white/10 text-foreground" : "text-foreground/60 hover:text-foreground"
@@ -51,17 +51,16 @@ export function BottomNav() {
           );
         })}
         <Link
-          to="/telemetria"
+          to={"/telemetria" as string}
           className={cn(
             "flex h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-3 text-xs font-medium transition-colors",
             path.startsWith("/telemetria") ? "bg-white/10 text-foreground" : "text-foreground/60 hover:text-foreground"
           )}
         >
           <LineChart className="h-4 w-4" />
-          <span className="hidden sm:inline">Telemetria</span>
         </Link>
         <Link
-          to="/ajustes"
+          to={"/ajustes" as string}
           className={cn(
             "flex h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-3 text-xs font-medium transition-colors",
             path.startsWith("/ajustes") ? "bg-white/10 text-foreground" : "text-foreground/60 hover:text-foreground"
